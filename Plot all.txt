@@ -1,0 +1,22 @@
+# Plot S12 magnitude and phase
+axs[2, 0].plot(frequency, s12_mag)
+axs[2, 0].set_title('S12 Magnitude')
+axs[2, 0].set_xlabel('Frequency (Hz)')
+axs[2, 0].set_ylabel('Magnitude (dB)')
+
+axs[2, 1].plot(frequency, s12_phase, color='orange', linewidth=0.8)
+axs[2, 1].set_title('S12 Phase')
+axs[2, 1].set_xlabel('Frequency (Hz)')
+axs[2, 1].set_ylabel('Phase (degrees)')
+
+# Plot S22 magnitude and phase
+axs[3, 0].plot(frequency, s22_mag)
+axs[3, 0].set_title('S22 Magnitude')
+axs[3, 0].set_xlabel('Frequency (Hz)')
+axs[3, 0].set_ylabel('Magnitude (dB)')
+
+axs[3, 1].plot(frequency, s22_phase, color='orange', linewidth=0.8)
+axs[3, 1].set_title('S22 Phase')
+axs[3, 1].set_xlabel('Frequency (Hz)')
+axs[3, 1].set_ylabel('Phase (degrees)')
+'''
