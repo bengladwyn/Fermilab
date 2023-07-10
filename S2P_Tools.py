@@ -1,9 +1,14 @@
 # %%
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
 # %%
-def parameters(filename):
+def plot(filename):
+    frequency, s11_mag, s11_phase, s21_mag, s21_phase = parameters(filename)
+    plot_parameters(filename,frequency, s11_mag, s11_phase, s21_mag, s21_phase)
+
+# %%
+def parameters(filename, plot_data=False):
     # Read the data from the text file
     data = np.loadtxt(filename, skiprows=5)
 
@@ -32,7 +37,11 @@ def parameters(filename):
         s22_mag = data[:, 7]
         s22_phase = data[:, 8]
     
+    if plot_data == True:
+        plot(filename)
+    
     return frequency, s11_mag, s11_phase, s21_mag, s21_phase
+
 '''
 # Plot S12 magnitude and phase
 axs[2, 0].plot(frequency, s12_mag)
@@ -59,35 +68,33 @@ axs[3, 1].set_ylabel('Phase (degrees)')
 
 
 # %%
-def plot(filename):
-    frequency, s11_mag, s11_phase, s21_mag, s21_phase = parameters(filename)
-    
+def plot_parameters(title,frequency, s11_mag, s11_phase, s21_mag, s21_phase):    
     # Create subplots
-    fig, axs = plt.subplots(2, 2, figsize=(8, 8))
-    print(filename)
+    fig, axs = plt.subplots(2, 2, figsize=(5, 5))
+    print(title)
     # Plot S11 magnitude and phase
     axs[0, 0].plot(frequency, s11_mag)
-    axs[0, 0].set_title('S11 Magnitude')
-    axs[0, 0].set_xlabel('Frequency (Hz)')
-    axs[0, 0].set_ylabel('Magnitude (dB)')
+    axs[0, 0].set_title('$s_{11}$ Magnitude', size=10)
+    axs[0, 0].set_xlabel('Frequency (Hz)', size=8)
+    axs[0, 0].set_ylabel('Magnitude', size=8)
 
     axs[0, 1].plot(frequency, s11_phase, color='orange', linewidth=0.8)
-    axs[0, 1].set_title('S11 Phase')
-    axs[0, 1].set_xlabel('Frequency (Hz)')
-    axs[0, 1].set_ylabel('Phase (degrees)')
+    axs[0, 1].set_title('$s_{11}$ Phase', size=10)
+    axs[0, 1].set_xlabel('Frequency (Hz)', size=8)
+    axs[0, 1].set_ylabel('Phase (degrees)', size=8)
 
     # Plot S21 magnitude and phase
     axs[1, 0].plot(frequency, s21_mag)
-    axs[1, 0].set_title('S21 Magnitude')
-    axs[1, 0].set_xlabel('Frequency (Hz)')
-    axs[1, 0].set_ylabel('Magnitude (dB)')
+    axs[1, 0].set_title('$s_{21}$ Magnitude', size=10)
+    axs[1, 0].set_xlabel('Frequency (Hz)', size=8)
+    axs[1, 0].set_ylabel('Magnitude', size=8)
 
     axs[1, 1].plot(frequency, s21_phase, color='orange', linewidth=0.8)
-    axs[1, 1].set_title('S21 Phase')
-    axs[1, 1].set_xlabel('Frequency (Hz)')
-    axs[1, 1].set_ylabel('Phase (degrees)')
+    axs[1, 1].set_title('$s_{21}$ Phase', size=10)
+    axs[1, 1].set_xlabel('Frequency (Hz)', size=8)
+    axs[1, 1].set_ylabel('Phase (degrees)', size=8)
     
-    plt.subplots_adjust(hspace=0.3, wspace=0.3)
+    plt.subplots_adjust(hspace=0.4, wspace=0.4)
     plt.show()
 
 
