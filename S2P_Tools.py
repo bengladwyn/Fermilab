@@ -17,15 +17,16 @@ def parameters(filename, plot_data=False):
 
     # Check if "RI" or "MA" is present in the 5th line
     if "RI" in header:
-        frequency = data[:, 0]
-        s11_mag = np.abs(data[:, 1]+1j*data[:, 2])
-        s11_phase = np.angle(data[:, 1]+1j*data[:, 2], deg=True)
-        s21_mag = np.abs(data[:, 3]+1j*data[:, 4])
-        s21_phase = np.angle(data[:, 3]+1j*data[:, 4], deg=True)
-        s12_mag = np.abs(data[:, 5]+1j*data[:, 6])
-        s12_phase = np.angle(data[:, 5]+1j*data[:, 6], deg=True)
-        s22_mag = np.abs(data[:, 7]+1j*data[:, 8])
-        s22_phase = np.angle(data[:, 7]+1j*data[:, 8], deg=True)
+        mask = data[:, 0]>10000000
+        frequency = data[:, 0][mask]
+        s11_mag = np.abs(data[:, 1]+1j*data[:, 2])[mask]
+        s11_phase = np.angle(data[:, 1]+1j*data[:, 2], deg=True)[mask]
+        s21_mag = np.abs(data[:, 3]+1j*data[:, 4])[mask]
+        s21_phase = np.angle(data[:, 3]+1j*data[:, 4], deg=True)[mask]
+        s12_mag = np.abs(data[:, 5]+1j*data[:, 6])[mask]
+        s12_phase = np.angle(data[:, 5]+1j*data[:, 6], deg=True)[mask]
+        s22_mag = np.abs(data[:, 7]+1j*data[:, 8])[mask]
+        s22_phase = np.angle(data[:, 7]+1j*data[:, 8], deg=True)[mask]
     elif "MA" in header:
         frequency = data[:, 0]
         s11_mag = data[:, 1]
